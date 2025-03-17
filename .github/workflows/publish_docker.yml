@@ -1,0 +1,23 @@
+name: Publish Secrets Docker Image
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  publish_docker:
+    permissions:
+      packages: write
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Publish to Registry
+        uses: elgohr/Publish-Docker-Github-Action@v5
+        with:
+          name: momentum-mod/secrets/secrets
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+          registry: ghcr.io
+          workdir: .
+          dockerfile: secrets.Dockerfile
