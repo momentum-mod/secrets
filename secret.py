@@ -13,7 +13,7 @@ if BWS_ACCESS_TOKEN is None:
     exit(1)
 
 client = BitwardenClient()
-client.access_token_login(BWS_ACCESS_TOKEN)
+client.auth().login_access_token(BWS_ACCESS_TOKEN)
 
 def find_secret_value(uuid: str):
     resp = client.secrets().get(uuid)
